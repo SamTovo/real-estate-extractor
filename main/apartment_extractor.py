@@ -1,13 +1,10 @@
 import requests as r
-import re
 import pandas as pd
 import sys
 import time
-sys.path.append("/home/samuel/Data/real-estate-extractor/lib")
-from b4s_abstractor import B4SApartmentExtractor
-from b4s_abstractor_soup import B4SApartmentExtractorSoup
-sys.path.append("/home/samuel/Data/real-estate-extractor/log")
-from log_status import logger
+from b4s_abstract.b4s_abstractor import B4SApartmentExtractor
+from b4s_abstract.b4s_abstractor_soup import B4SApartmentExtractorSoup
+from loggin_abstract.log_status import logger
 class GetApartmentsInfo:
 
     def __init__(self):
@@ -26,7 +23,7 @@ class GetApartmentsInfo:
     def _get_apartment_page(self):
         logger(f"Making request number {self.page_number}",status="INFO")
         self.url = f'https://www.zapimoveis.com.br/aluguel/apartamentos/sp+sao-paulo/?onde=,S%C3%A3o%20Paulo,S%C3%A3o%20Paulo,,,,,city,BR%3ESao%20Paulo%3ENULL%3ESao%20Paulo,-23.555771,-46.639557,%2Faluguel%2Fimoveis%2Fsp%2Bsao-paulo%2F&transacao=Aluguel&tipo=Im%C3%B3vel%20usado&tipos=apartamento_residencial,studio_residencial,kitnet_residencial,casa_residencial,,condominio_residencial,casa-vila_residencial,cobertura_residencial,flat_residencial,loft_residencial,lote-terreno_residencial,granja_residencial&pagina={self.page_number}'
-        self.headers = {'User-Agent': 'Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148'}
+        self.headers = {'User-Agent': 'Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E147'}
         self.apartments_page=r.get(self.url,headers=self.headers)
         
 
@@ -82,13 +79,13 @@ class GetApartmentsInfo:
         apartment_infos_df=pd.DataFrame(apartment_infos_dict)
         return apartment_infos_df
     
-# def apartment_extractor():
-#     ap=GetApartmentsInfo()
-#     print(ap.generate_pandas_apartment_info())
+def apartment_extractor():
+    ap=GetApartmentsInfo()
+    print(ap.generate_pandas_apartment_info())
 
 
-# if __name__=="__main__":
-#     apartment_extractor()        
+if __name__=="__main__":
+    apartment_extractor()        
 
 
 

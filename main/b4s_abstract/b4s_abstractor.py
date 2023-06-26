@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 import sys
-sys.path.append("/home/samuel/Data/real-estate-extractor/log")
-from log_status import logger
+from loggin_abstract.log_status import logger
 class B4SApartmentExtractor:
     """
     Abstracts BeatifulSoup's way to find html objects,
